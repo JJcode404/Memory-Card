@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./view.css";
+import React from "react";
 import instructionIcon from "./assets/info.png";
 import { Card } from "./card";
 
@@ -8,6 +9,19 @@ function App() {
   const [score, setScore] = useState(-1);
   const [bestScore, setbestScore] = useState(-1);
   const [clickedState, setClickedState] = useState({});
+
+  const cardComponents = [
+    <Card image={image} index={0} />,
+    <Card image={image} index={1} />,
+    <Card image={image} index={2} />,
+    <Card image={image} index={3} />,
+    <Card image={image} index={4} />,
+    <Card image={image} index={5} />,
+    <Card image={image} index={6} />,
+    <Card image={image} index={7} />,
+    <Card image={image} index={8} />,
+    <Card image={image} index={9} />,
+  ];
 
   useEffect(() => {
     fetch("https://pokeapi.co/api/v2/pokemon?limit=10")
@@ -38,19 +52,6 @@ function App() {
       });
   }, []);
 
-  const cardComponents = [
-    <Card image={image} index={0} />,
-    <Card image={image} index={1} />,
-    <Card image={image} index={2} />,
-    <Card image={image} index={3} />,
-    <Card image={image} index={4} />,
-    <Card image={image} index={5} />,
-    <Card image={image} index={6} />,
-    <Card image={image} index={7} />,
-    <Card image={image} index={8} />,
-    <Card image={image} index={9} />,
-  ];
-
   function playround() {}
 
   return (
@@ -74,9 +75,13 @@ function App() {
         </div>
       </div>
       <div className="container">
-        {cardComponents.map((card, key) => (
-          <div key={key}>{card}</div>
-        ))}
+        {image ? (
+          cardComponents.map((card, key) => (
+            <React.Fragment key={key}>{card}</React.Fragment>
+          ))
+        ) : (
+          <p>Loading images........</p>
+        )}
       </div>
     </>
   );
