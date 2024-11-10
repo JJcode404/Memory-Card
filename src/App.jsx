@@ -162,22 +162,17 @@ function App() {
   }, []);
 
   function handleClickEvent(id) {
-    function game() {
-      if (clickedState[id]) {
-        setScore(0);
-      } else {
-        setScore((prevScore) => prevScore + 1);
-        setbestScore((prevBestScore) => Math.max(prevBestScore, score + 1));
-      }
+    if (clickedState[id]) {
+      setScore(0);
+      setClickedState({});
+    } else {
+      setScore((prevScore) => prevScore + 1);
+      setbestScore((prevBestScore) => Math.max(prevBestScore, score + 1));
+      setClickedState((prevState) => ({
+        ...prevState,
+        [id]: true,
+      }));
     }
-    game();
-
-    console.log(clickedState);
-    setClickedState((prevState) => ({
-      ...prevState,
-      [id]: !prevState[id],
-    }));
-    console.log("you have clicked this card", id);
   }
 
   return (
