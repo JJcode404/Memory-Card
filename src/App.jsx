@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import "./view.css";
 import React from "react";
 import instructionIcon from "./assets/info.png";
@@ -9,18 +9,127 @@ function App() {
   const [score, setScore] = useState(-1);
   const [bestScore, setbestScore] = useState(-1);
   const [clickedState, setClickedState] = useState({});
-
   const cardComponents = [
-    <Card image={image} index={0} />,
-    <Card image={image} index={1} />,
-    <Card image={image} index={2} />,
-    <Card image={image} index={3} />,
-    <Card image={image} index={4} />,
-    <Card image={image} index={5} />,
-    <Card image={image} index={6} />,
-    <Card image={image} index={7} />,
-    <Card image={image} index={8} />,
-    <Card image={image} index={9} />,
+    {
+      image: (
+        <Card
+          image={image}
+          index={0}
+          isclicked={clickedState["card-0"] || false}
+          handleClick={() => handleClickEvent("card-0")}
+          id="card-0"
+        />
+      ),
+      id: "card-0",
+    },
+    {
+      image: (
+        <Card
+          image={image}
+          index={1}
+          isclicked={clickedState["card-1"] || false}
+          handleClick={() => handleClickEvent("card-1")}
+          id="card-1"
+        />
+      ),
+      id: "card-1",
+    },
+    {
+      image: (
+        <Card
+          image={image}
+          index={2}
+          isclicked={clickedState["card-2"] || false}
+          handleClick={() => handleClickEvent("card-2")}
+          id="card-2"
+        />
+      ),
+      id: "card-2",
+    },
+    {
+      image: (
+        <Card
+          image={image}
+          index={3}
+          isclicked={clickedState["card-3"] || false}
+          handleClick={() => handleClickEvent("card-3")}
+          id="card-3"
+        />
+      ),
+      id: "card-3",
+    },
+    {
+      image: (
+        <Card
+          image={image}
+          index={4}
+          isclicked={clickedState["card-4"] || false}
+          handleClick={() => handleClickEvent("card-4")}
+          id="card-4"
+        />
+      ),
+      id: "card-4",
+    },
+    {
+      image: (
+        <Card
+          image={image}
+          index={5}
+          isclicked={clickedState["card-5"] || false}
+          handleClick={() => handleClickEvent("card-5")}
+          id="card-5"
+        />
+      ),
+      id: "card-5",
+    },
+    {
+      image: (
+        <Card
+          image={image}
+          index={6}
+          isclicked={clickedState["card-6"] || false}
+          handleClick={() => handleClickEvent("card-6")}
+          id="card-6"
+        />
+      ),
+      id: "card-6",
+    },
+    {
+      image: (
+        <Card
+          image={image}
+          index={7}
+          isclicked={clickedState["card-7"] || false}
+          handleClick={() => handleClickEvent("card-7")}
+          id="card-7"
+        />
+      ),
+      id: "card-7",
+    },
+    {
+      image: (
+        <Card
+          image={image}
+          index={8}
+          isclicked={clickedState["card-8"] || false}
+          handleClick={() => handleClickEvent("card-8")}
+          id="card-8"
+        />
+      ),
+      id: "card-8",
+    },
+    {
+      image: (
+        <Card
+          image={image}
+          index={9}
+          isclicked={clickedState["card-9"] || false}
+          handleClick={() => handleClickEvent("card-9")}
+          id="card-9"
+        />
+      ),
+      id: "card-9",
+    },
   ];
 
   useEffect(() => {
@@ -52,7 +161,14 @@ function App() {
       });
   }, []);
 
-  function playround() {}
+  function handleClickEvent(id) {
+    console.log(clickedState);
+    setClickedState((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
+    console.log("you have clicked this card", id);
+  }
 
   return (
     <>
@@ -76,8 +192,8 @@ function App() {
       </div>
       <div className="container">
         {image ? (
-          cardComponents.map((card, key) => (
-            <React.Fragment key={key}>{card}</React.Fragment>
+          cardComponents.map((card) => (
+            <React.Fragment key={card.id}>{card.image}</React.Fragment>
           ))
         ) : (
           <p>Loading images........</p>

@@ -1,6 +1,12 @@
-function Card({ image, index, handleClick, picAngle = "frontDefault" }) {
+function Card({
+  image,
+  index,
+  handleClick,
+  picAngle = "frontDefault",
+  isclicked,
+}) {
   return (
-    <div className="card" onClick={handleClick}>
+    <div className={isclicked ? "clicked card" : "card"} onClick={handleClick}>
       {image && (
         <img
           src={image[index][picAngle]}
