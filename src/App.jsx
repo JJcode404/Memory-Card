@@ -1,13 +1,13 @@
 import { useState, useEffect, useMemo } from "react";
 import "./view.css";
 import React from "react";
-import instructionIcon from "./assets/info.png";
+import instructionIcon from "./assets/instruction.png";
 import { Card } from "./card";
 
 function App() {
   const [image, setImage] = useState(null);
-  const [score, setScore] = useState(-1);
-  const [bestScore, setbestScore] = useState(-1);
+  const [score, setScore] = useState(0);
+  const [bestScore, setbestScore] = useState(0);
   const [clickedState, setClickedState] = useState({});
   const cardComponents = [
     {
@@ -162,6 +162,16 @@ function App() {
   }, []);
 
   function handleClickEvent(id) {
+    function game() {
+      if (clickedState[id]) {
+        setScore(0);
+      } else {
+        setScore((prevScore) => prevScore + 1);
+        setbestScore((prevBestScore) => Math.max(prevBestScore, score + 1));
+      }
+    }
+    game();
+
     console.log(clickedState);
     setClickedState((prevState) => ({
       ...prevState,
