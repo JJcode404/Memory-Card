@@ -9,6 +9,7 @@ function App() {
   const [score, setScore] = useState(0);
   const [bestScore, setbestScore] = useState(0);
   const [clickedState, setClickedState] = useState({});
+
   const cardComponents = [
     {
       image: (
@@ -197,9 +198,11 @@ function App() {
       </div>
       <div className="container">
         {image ? (
-          cardComponents.map((card) => (
-            <React.Fragment key={card.id}>{card.image}</React.Fragment>
-          ))
+          cardComponents
+            .sort(() => Math.random() - 0.5)
+            .map((card) => (
+              <React.Fragment key={card.id}>{card.image}</React.Fragment>
+            ))
         ) : (
           <p>Loading images........</p>
         )}

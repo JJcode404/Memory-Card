@@ -78,10 +78,10 @@ body {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
-.card.clicked {
+/* .card.clicked {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-  animation: scaleAnimation 0.5s 1;
-}
+  animation: scaleAnimation 0.4s 1;
+} */
 
 @keyframes scaleAnimation {
   0% {
